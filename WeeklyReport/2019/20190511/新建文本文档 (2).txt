@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<malloc.h>
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+#include<algorithm>
+#include<iostream>
+#include<iomanip>
+using namespace std;
+struct bank
+{
+    char name[20];
+    int card;
+    int n;
+    int flag;
+} no[10010];
+time_t timep,timeq;
+struct tm *p,*q;
+int star_hour,star_minute;
+void close()
+{
+    system("cls");
+    time(&timeq);
+    q=localtime(&timeq);
+    int last_hour=q->tm_hour;
+    int last_minute=q->tm_min;
+    cout<<"开始营业时间为"<<setw(2)<<setfill('0')<<star_hour<<":"<<setw(2)<<setfill('0')<<star_minute<<endl;
+    cout<<"结束营业时间为"<<setw(2)<<setfill('0')<<last_hour<<":"<<setw(2)<<setfill('0')<<last_minute<<endl;
+    int sum=0;
+    if(last_minute>=star_minute)
+    {
+        sum+=last_minute-star_minute;
+        sum+=(last_hour-star_hour)*60;
+    }
+    else
+    {
+        sum+=last_minute;
+        sum+=(60-star_minute);
+        sum+=(last_hour-star_hour-1)*60;
+    }
+    cout<<"总营业时长为（分钟）："<<sum<<endl;
+}
+int main()
+{
+    cout<<"==============================================="<<endl;
+    cout<<"            银行业务处理模拟系统"<<endl;
+    cout<<"==============================================="<<endl;
+    cout<<"按回车键，银行开始营业......"<<endl;
+    char c=getchar();
+    if(c!=0)
+        system("cls");
+    time(&timep);
+    p=localtime(&timep);
+    star_hour=p->tm_hour;
+    star_minute=p->tm_min;
+    while(1)
+    {
+        system("cls");
+        cout<<"==============================================="<<endl;
+        cout<<"            银行业务处理模拟系统"<<endl;
+        cout<<"==============================================="<<endl;
+        cout<<"1.客户进入      2.客户离开      3.银行结束营业"<<endl;
+        int n;
+        cin>>n;
+        if(n==1)
+        {
+            
+        }
+        if(n==2)
+        {
+
+        }
+        if(n==3)
+        {
+            char c;
+            cout<<"是否确定结束营业？（y or n）：";
+            cin>>c;
+            if(c=='y')
+            {
+                close();
+                break;
+            }
+        }
+        else
+            exit(0);
+    }
+    return 0;
+}
